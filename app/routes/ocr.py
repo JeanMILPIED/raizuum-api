@@ -3,6 +3,8 @@ from fastapi.security import OAuth2PasswordBearer
 from app.services.ocr_service import extract_text_from_pdf, get_features_text_cv, process_pdf
 import io
 
+from app.models.ocr_request import OCRRequest #FIXME: should we use ?
+
 router = APIRouter()
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/login/")
 
@@ -24,4 +26,9 @@ async def extract_from_pdf(file: UploadFile = File(...), token: str = Depends(au
 
     keywords_dict = {}
     extracted_text, features = get_features_text_cv(extracted_text, keywords_dict)
+    return {"extracted_text": extracted_text, "features": features}
+
+@router.post("/extract-features/")
+def extract_features(request: OCRRequest):
+    extracted_text, features = get_features_text_cv(request.my_text, request.keywords_dict)
     return {"extracted_text": extracted_text, "features": features}

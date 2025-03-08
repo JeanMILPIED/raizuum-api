@@ -5,6 +5,7 @@ from fastapi import UploadFile
 import tempfile
 
 
+
 def extract_text_by_page(pdf_path):
     """
     Extract text from a PDF file, returning a list of strings where each string is the text of a single page.
