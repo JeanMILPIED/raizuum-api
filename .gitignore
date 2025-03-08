@@ -1,0 +1,35 @@
+# Ignore Python cache files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.log
+
+# Virtual environment
+venv/
+env/
+*.env
+
+# Ignore IDE/editor-specific files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Ignore Docker-related files
+docker-compose.override.yml
+
+# Ignore compiled code and build directories
+build/
+dist/
+*.egg-info/
+*.spec
+
+# Ignore dependencies installed via pip
+pip-wheel-metadata/
+*.egg
+*.whl
+
+# Ignore local file uploads (optional, depending on usage)
+uploads/
+tmp/
