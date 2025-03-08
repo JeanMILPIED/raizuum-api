@@ -3,7 +3,7 @@ from pdfminer.high_level import extract_pages
 from pdfminer.layout import LTTextContainer
 from fastapi import UploadFile
 import tempfile
-from app.utils.extractor import *
+from app.utils.extractors import *
 from app.utils.nlp_utils import *
 from app.utils.scoring import *
 
