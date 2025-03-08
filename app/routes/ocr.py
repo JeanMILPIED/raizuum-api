@@ -1,6 +1,6 @@
 from fastapi import APIRouter, File, UploadFile, HTTPException, Depends
 from fastapi.security import OAuth2PasswordBearer
-from app.services.ocr_service import extract_text_from_pdf, get_features_text_cv
+from app.services.ocr_service import extract_text_from_pdf, get_features_text_cv, process_pdf
 import io
 
 router = APIRouter()
@@ -18,8 +18,7 @@ async def extract_from_pdf(file: UploadFile = File(...), token: str = Depends(au
     if not file.filename.endswith(".pdf"):
         raise HTTPException(status_code=400, detail="Only PDF files are allowed")
 
-    pdf_content = io.BytesIO(await file.read())
-    extracted_text = extract_text_from_pdf(pdf_content)
+    extracted_text = await process_pdf(file)
     if not extracted_text:
         raise HTTPException(status_code=400, detail="No text found in the PDF")
 
