@@ -1,0 +1,9 @@
+fastapi
+uvicorn
+python-dotenv
+pydantic
+pdfminer.six
+PyJWT
+bcrypt
+passlib[bcrypt]
+python-multipart
