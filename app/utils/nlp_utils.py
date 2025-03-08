@@ -43,3 +43,49 @@ def count_most_frequent_words(text, num_words=10, min_length=4):
     most_common_words = word_counts.most_common(num_words)
 
     return most_common_words
+
+def human_reading(num_words, wpm=200):
+    # Estimate reading duration
+    duration_minutes = num_words / wpm
+    duration_seconds = duration_minutes * 60
+    return int(duration_seconds)
+
+def find_pronouns(text):
+    # Define the pronouns to search for
+    pronouns = ['I', 'i','We','we', 'They','they', 'You','you', 'Je','je' 'Tu', 'tu', 'Il','il', 'Nous','nous' 'Vous','vous', 'Ils','ils', 'Elles','elles',"j'","J'"]
+
+    # Compile a regex pattern for case-insensitive matching with word boundaries
+    pattern = re.compile(r'\b(?:-|\s|^)?(' + '|'.join(pronouns) + r"|j')\b", re.IGNORECASE)
+
+    # Find all matches in the input text
+    matches = pattern.findall(text)
+
+
+    # Normalize matches to the correct capitalization
+    matches = [match.capitalize() for match in matches]
+    pronoun_nbr=len(matches)
+
+    #count the most frequent ponouns
+    pronoun_counts = Counter(matches)
+    # Return the list of matched pronouns
+    return pronoun_counts, pronoun_nbr
+
+def find_cut_words(text):
+    # Compile a regex pattern for cut words
+    pattern = re.compile(r'\b\w+-\s+\w+\b', re.IGNORECASE)
+
+    # Find all matches in the input text
+    matches = pattern.findall(text)
+
+    # Filter out date-like patterns
+    filtered_matches = [
+        match for match in matches
+        if not re.search(r'\b\d{4}\b', match) and
+           not re.search(r'\b(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\b', match, re.IGNORECASE)]
+
+    # Return the list of matched cut words
+    return filtered_matches
+
+def word_numbers(text):
+    word_numbers = len([s for s in re.split("[() ,|;\W]+", text)])
+    return word_numbers
