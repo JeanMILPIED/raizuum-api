@@ -30,5 +30,5 @@ async def extract_from_pdf(file: UploadFile = File(...), token: str = Depends(au
 
 @router.post("/extract-features/")
 def extract_features(request: OCRRequest):
-    extracted_text, features = get_features_text_cv(request.my_text, request.keywords_dict)
+    extracted_text, features = get_features_text_cv(request.text, request.keywords_dict)
     return {"extracted_text": extracted_text, "features": features}
