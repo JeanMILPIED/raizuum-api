@@ -11,7 +11,7 @@ To interact with the API endpoints, you'll need to authenticate using a valid OA
 The token is provided by the `/login/` endpoint. You can obtain the token by logging in using valid credentials.
 
 ### Request Header Example:
-```bash
+
 Authorization: Bearer YOUR_TOKEN_HERE
 
 ### Endpoints
@@ -23,18 +23,20 @@ Request Body:
 file (required): The PDF file you want to upload.
 
 Request Example:
-
+```
 curl -X 'POST' \
   'http://127.0.0.1:8000/extract-from-pdf/' \
   -H 'accept: application/json' \
   -H 'Authorization: Bearer YOUR_TOKEN_HERE' \
   -F 'file=@path_to_your_pdf.pdf'
+```
 
 Response:
 extracted_text: The text extracted from the PDF.
 features: Features extracted from the text using Computer Vision (CV).
 
 Response Example:
+```
 {
     "extracted_text": "This is the extracted text from the PDF.",
     "features": {
@@ -42,6 +44,7 @@ Response Example:
         "other_feature": "value"
     }
 }
+```
 
 Error Responses:
 400 Bad Request: If the file is not a PDF or if no text is found in the PDF.
