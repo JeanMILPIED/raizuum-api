@@ -6,4 +6,9 @@ pdfminer.six
 PyJWT
 bcrypt
 passlib[bcrypt]
+pyspellchecker==0.8.1
 python-multipart
+python-jose
+passlib[bcrypt]
+numpy==1.26.0
+pandas==2.1.0

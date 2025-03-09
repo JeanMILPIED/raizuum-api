@@ -17,16 +17,20 @@ def authenticate_request(token: str = Depends(oauth2_scheme)):
 
 @router.post("/extract-from-pdf/")
 async def extract_from_pdf(file: UploadFile = File(...), token: str = Depends(authenticate_request)):
-    if not file.filename.endswith(".pdf"):
-        raise HTTPException(status_code=400, detail="Only PDF files are allowed")
+    try:
+        if not file.filename.endswith(".pdf"):
+            raise HTTPException(status_code=400, detail="Only PDF files are allowed")
 
-    extracted_text = await process_pdf(file)
-    if not extracted_text:
-        raise HTTPException(status_code=400, detail="No text found in the PDF")
+        extracted_text = await process_pdf(file)
+        if not extracted_text:
+            raise HTTPException(status_code=400, detail="No text found in the PDF")
 
-    keywords_dict = {}
-    extracted_text, features = get_features_text_cv(extracted_text, keywords_dict)
-    return {"extracted_text": extracted_text, "features": features}
+        keywords_dict = {}
+        extracted_text, features = get_features_text_cv(extracted_text, keywords_dict)
+        return {"extracted_text": extracted_text, "features": features}
+
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error processing file: {str(e)}")
 
 @router.post("/extract-features/")
 def extract_features(request: OCRRequest):

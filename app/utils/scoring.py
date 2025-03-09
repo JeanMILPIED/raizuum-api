@@ -1,4 +1,6 @@
 import re
+import pandas as pd
+import numpy as np
 
 def calculate_cv_score(cv_text, keywords_dict):
     score = 0
@@ -103,6 +105,19 @@ def section_score(feat_cv_dict,max_score=2):
 
     return feat_cv_dict
 
+def role_skills_cv(feat_cv_dict, keywords_dict):
+    #list where score is null and where score is the best
+    role_skills_scores={"da":0, "de": 0, "ds":0}
+    for my_key in keywords_dict:
+        for the_role in ["da","de","ds"]:
+            if the_role in keywords_dict[my_key]["subtype"]:
+                try:
+                    role_skills_scores[the_role]+=feat_cv_dict[my_key]["score"]
+                except:
+                    pass
+
+    return role_skills_scores
+
 def clear_role_score(feat_cv, keywords_dict_ds, max_score=4):
     clear_role_score=0
     role_skills_score = role_skills_cv(feat_cv, keywords_dict_ds)
@@ -129,8 +144,8 @@ def clear_role_score(feat_cv, keywords_dict_ds, max_score=4):
     feat_cv["same_highest_skill"]= same_highest_skill
     feat_cv["major_df_skills"] = major_df_skills
     feat_cv["major_df_words"] = major_df_words
-    feat_cv["df_role_skills"]=df_role_skills
-    feat_cv["df_role_words"] = df_role_words
+    #feat_cv["df_role_skills"]=df_role_skills
+    #feat_cv["df_role_words"] = df_role_words
 
     return feat_cv
 

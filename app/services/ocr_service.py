@@ -9,7 +9,7 @@ from app.utils.scoring import *
 
 
 
-def extract_text_by_page(pdf_path):
+def extract_text_from_pdf(pdf_path):
     """
     Extract text from a PDF file, returning a list of strings where each string is the text of a single page.
 
@@ -41,7 +41,7 @@ async def process_pdf(file: UploadFile):
         tmp_pdf_path = tmp_file.name
 
     # Extract text
-    text_pages = extract_text_by_page(tmp_pdf_path)
+    text_pages = extract_text_from_pdf(tmp_pdf_path)
 
     # Delete temporary file after processing
     os.remove(tmp_pdf_path)
@@ -192,8 +192,12 @@ def get_features_text_cv(my_text, keywords_dict, cv_feat_dict={}):
     impact_numbers = extract_impact(my_text_ok)
     cv_feat_dict["impact_numbers"] = impact_numbers
 
+    #extract urls
+    urls = extract_urls(my_text_ok)
+    cv_feat_dict["urls"] = urls
+
     # get image features
-    cv_feat_dict = get_features_pdf_cv('your_resume.pdf', 1, cv_feat_dict)
+    #cv_feat_dict = get_features_pdf_cv('your_resume.pdf', 1, cv_feat_dict)
 
     # get contact score
     cv_feat_dict = contact_score(cv_feat_dict)
@@ -217,7 +221,7 @@ def get_features_text_cv(my_text, keywords_dict, cv_feat_dict={}):
     cv_feat_dict = comp_total_score(cv_feat_dict)
 
     # get match vector
-    cv_feat_dict["match_vector"] = build_role_skills_impact_vector(cv_feat_dict)
+    #cv_feat_dict["match_vector"] = build_role_skills_impact_vector(cv_feat_dict)
 
     return my_text, cv_feat_dict
 

@@ -1,5 +1,6 @@
 import re
 from spellchecker import SpellChecker
+import unicodedata
 
 def extract_impact(text):
     # Define a regex pattern to match numbers followed by %
@@ -166,6 +167,15 @@ def extract_dates(text):
     dates=[my_date for my_date in dates if int(my_date) >=2000]
     return dates
 
+def get_min_max_dates(dates):
+    try:
+        # Find minimum and maximum dates
+        min_date = min(dates)
+        max_date = max(dates)
+    except:
+        min_date, max_date = 0, 0
+    return min_date, max_date
+
 def analyze_bullets_text(text, max_length=30):
     # Find all bullet points and the text following them until the next bullet point or end of text
     bullet_points = re.findall(r'^[\s]*[-•*●–—▪]+[\s]+(.*?)(?=(\n[\s]*[-•*●–—▪])|\Z)', text, re.DOTALL | re.MULTILINE)
@@ -200,3 +210,7 @@ def check_typos(text):
             typos.append(word)
             # typos_list.append(word)
     return typos
+
+def extract_urls(text):
+    url_pattern = re.compile(r'https?://\S+')
+    return url_pattern.findall(text)

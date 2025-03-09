@@ -1,4 +1,5 @@
 import re
+from collections import Counter
 
 def remove_accents(input_str):
     # Define a regular expression to match accented characters
