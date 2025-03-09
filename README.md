@@ -1,5 +1,5 @@
 ## raizuum-api 🚀
-The **open source api** to extract data from CV in pdfs and to score a CV on nulerous criteria.  
+The **open source api** to extract data from CV in pdfs and to score a CV on numerous recruiters criteria.  
 Specifically designed for **CVs in the data world**
 
 ### API Documentation
