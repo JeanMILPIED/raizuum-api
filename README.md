@@ -1,5 +1,5 @@
-##raizuum-api
-The open source api to extract data from CV in pdfs  
+## raizuum-api 🚀
+The **open source api** to extract data from CV in pdfs  
 Specifically designed for **CVs in the data world**
 
 ### API Documentation
