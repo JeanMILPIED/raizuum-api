@@ -9,7 +9,7 @@ import os
 load_dotenv()
 
 # Initialize FastAPI app
-app = FastAPI(title="OCR API", description="An API to extract and analyze text from PDFs.")
+app = FastAPI(title="OCR API", description="An API to extract and analyze text from CV in PDFs.")
 
 # CORS middleware to allow frontend access
 app.add_middleware(
