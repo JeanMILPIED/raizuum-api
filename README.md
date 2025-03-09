@@ -1,13 +1,13 @@
-**raizuum-api**
+##raizuum-api
 The open source api to extract data from CV in pdfs  
 Specifically designed for **CVs in the data world**
 
-## API Documentation
+### API Documentation
 
 This FastAPI application provides endpoints to extract text and features from CV files in pdf using Optical Character Recognition (OCR) and other text processing techniques.  
 It also supports authentication using OAuth2.
 
-### Authentication
+#### Authentication
 
 To interact with the API endpoints, you'll need to authenticate using a valid OAuth2 token. The token must be included in the **Authorization** header of the request.
 
@@ -19,7 +19,7 @@ The token is provided by the `/login/` endpoint. You can obtain the token by log
 
 Authorization: Bearer YOUR_TOKEN_HERE
 
-### Endpoints
+#### Endpoints
 **POST /extract-from-pdf/**  
 Description:  
 This endpoint allows you to upload a PDF file. The file is processed to extract text and relevant features (keywords) from the PDF.  
@@ -87,7 +87,7 @@ Response Example:
 }
 ```
 
-### Error Handling
+#### Error Handling
 The API responds with appropriate HTTP status codes:  
 
 - 200 OK: Successfully processed the request.  
@@ -95,7 +95,7 @@ The API responds with appropriate HTTP status codes:
 - 401 Unauthorized: Missing or invalid OAuth2 token.  
 - 500 Internal Server Error: Issues with processing or other internal errors.  
 
-### Running the API  
+#### Running the API  
 
 Clone the repository.  
 
@@ -109,7 +109,7 @@ docker run -p 8000:8000 raizuum-api
 
 Access the Swagger UI documentation at :  http://127.0.0.1:8000/docs  
 
-### Notes
+#### Notes
 Ensure that you have set up the authentication and have a valid token for accessing the API.  
 
 You can refer to the Swagger UI for more detailed interaction with the API, including testing endpoints directly from the browser.  
